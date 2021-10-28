@@ -31,30 +31,30 @@ type KvServer interface {
 	Get(name string) (string, bool)
 }
 
-type AbstractKvServer struct {
+type DefaultKvServer struct {
 	kv map[string]string
 }
 
-func (server *AbstractKvServer) Start() {
+func (server *DefaultKvServer) Start() {
 	log.Println("start")
 	server.kv = make(map[string]string)
 }
 
-func (server *AbstractKvServer) Stop() {
+func (server *DefaultKvServer) Stop() {
 	log.Println("stop")
 }
 
-func (server *AbstractKvServer) Put(name string, val string) bool {
+func (server *DefaultKvServer) Put(name string, val string) bool {
 	server.kv[name] = val
 	return true
 }
 
-func (server *AbstractKvServer) Del(name string) bool {
+func (server *DefaultKvServer) Del(name string) bool {
 	delete(server.kv, name)
 	return true
 }
 
-func (server *AbstractKvServer) Get(name string) (string, bool) {
+func (server *DefaultKvServer) Get(name string) (string, bool) {
 	val, ok := server.kv[name]
 	return val, ok
 }
